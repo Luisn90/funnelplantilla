@@ -277,9 +277,9 @@ footer {
   <div class="footer-logo-text">Academia Pro</div>
   <p class="footer-copy">2026 Academia Pro. Todos los derechos reservados.</p>
   <div class="footer-links">
-    <a href="#">Aviso Legal</a>
-    <a href="#">Política de Privacidad</a>
-    <a href="#">Política de Cookies</a>
+    <a href="legal-aviso.html">Aviso Legal</a>
+    <a href="legal-privacidad.html">Política de Privacidad</a>
+    <a href="legal-cookies.html">Política de Cookies</a>
   </div>
 </footer>
 
@@ -289,6 +289,43 @@ footer {
   if (saved && saved.trim()) {
     document.getElementById('calendar-embed').innerHTML = saved;
   }
+</script>
+
+<!-- ══════════════════════════════════════
+     COOKIE BANNER
+     Incluir justo antes de </body> en todas las páginas
+══════════════════════════════════════ -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;width:calc(100% - 48px);max-width:680px;">
+  <div style="background:#111115;border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:20px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 8px 40px rgba(0,0,0,0.5);">
+    <p style="font-family:'Manrope',sans-serif;font-size:13px;color:rgba(244,244,246,0.6);line-height:1.6;flex:1;min-width:200px;margin:0;">
+      Usamos cookies propias y de terceros para analizar el uso del sitio y mostrarte contenido relevante.
+      <a href="legal-cookies.html" style="color:rgba(244,244,246,0.85);text-decoration:underline;text-underline-offset:3px;">Política de Cookies</a>
+    </p>
+    <div style="display:flex;gap:8px;flex-shrink:0;">
+      <button onclick="cookieChoice('reject')" style="padding:10px 18px;border-radius:8px;background:none;border:1px solid rgba(255,255,255,0.13);font-family:'Manrope',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(244,244,246,0.5);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#f4f4f6';this.style.borderColor='rgba(255,255,255,0.25)'" onmouseout="this.style.color='rgba(244,244,246,0.5)';this.style.borderColor='rgba(255,255,255,0.13)'">Rechazar</button>
+      <button onclick="cookieChoice('accept')" style="padding:10px 18px;border-radius:8px;background:#f4f4f6;border:none;font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0c0c0e;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var consent = localStorage.getItem('cookie_consent');
+  if (!consent) {
+    setTimeout(function() {
+      document.getElementById('cookie-banner').style.display = 'block';
+    }, 800);
+  }
+})();
+
+function cookieChoice(type) {
+  localStorage.setItem('cookie_consent', type);
+  var banner = document.getElementById('cookie-banner');
+  banner.style.opacity = '0';
+  banner.style.transform = 'translateX(-50%) translateY(10px)';
+  banner.style.transition = 'opacity 0.3s, transform 0.3s';
+  setTimeout(function() { banner.style.display = 'none'; }, 300);
+}
 </script>
 
 </body>
