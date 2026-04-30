@@ -158,6 +158,26 @@ header {
   line-height: 1.5;
 }
 
+/* TEMPORAL — eliminar cuando el calendario esté configurado */
+.btn-temp {
+  margin-top: 8px;
+  display: inline-block;
+  padding: 14px 28px;
+  background: var(--text);
+  color: #0c0c0e;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-temp:hover  { opacity: 0.88; transform: translateY(-1px); }
+.btn-temp:active { transform: translateY(0); }
+
 /* ─── FOOTER ─── */
 footer {
   border-top: 1px solid var(--border);
@@ -246,6 +266,7 @@ footer {
         </div>
         <div class="placeholder-title">Calendario no configurado</div>
         <div class="placeholder-sub">Pega el código embed de tu calendario desde el panel de administración.</div>
+        <a href="funnel-confirmed.html" class="btn-temp">Continuar al siguiente paso</a>
       </div>
     </div>
   </div>
