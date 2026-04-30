@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu clase gratuita — Academia Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #0c0c0e;
+  --bg2:    #111115;
+  --border: rgba(255,255,255,0.08);
+  --text:   #f4f4f6;
+  --muted:  rgba(244,244,246,0.5);
+  --font:   'Manrope', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 10px; }
+
+/* ─── HEADER ─── */
+header {
+  padding: 36px 40px 0;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* ─── PAGE ─── */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  flex: 1;
+}
+
+/* ─── HERO ─── */
+.hero {
+  padding: 52px 0 0;
+  text-align: center;
+}
+
+.video-label {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 28px;
+  animation: fadeIn 0.5s ease both;
+}
+
+.video-label strong { color: var(--text); }
+
+/* ─── VIDEO EMBED ─── */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #000;
+  animation: fadeIn 0.6s ease 0.08s both;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* placeholder cuando no hay iframe */
+.video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: linear-gradient(160deg, #1b1b22 0%, #0e0e12 100%);
+}
+
+.video-placeholder-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-placeholder-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: rgba(255,255,255,0.35);
+  margin-left: 3px;
+}
+
+.video-placeholder p {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* ─── UNDER VIDEO ─── */
+.under-video {
+  margin-top: 40px;
+  animation: fadeIn 0.6s ease 0.16s both;
+}
+
+.under-video h2 {
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  max-width: 680px;
+  margin: 0 auto 32px;
+}
+
+.under-video h2 strong {
+  /* hereda el peso, solo queremos distinguir semánticamente */
+}
+
+.under-video h2 .normal {
+  font-weight: 400;
+  color: rgba(244,244,246,0.65);
+}
+
+/* ─── CTA BUTTON ─── */
+.btn-cta {
+  display: inline-block;
+  padding: 18px 48px;
+  background: var(--text);
+  color: #0c0c0e;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+  animation: fadeIn 0.6s ease 0.22s both;
+}
+
+.btn-cta:hover  { opacity: 0.88; transform: translateY(-1px); }
+.btn-cta:active { transform: translateY(0); }
+
+.cta-hint {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--muted);
+  animation: fadeIn 0.6s ease 0.28s both;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 40px;
+  max-width: 960px;
+  margin: 48px auto 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: rgba(244,244,246,0.3);
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(244,244,246,0.25);
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links a {
+  font-size: 12px;
+  color: rgba(244,244,246,0.28);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: rgba(244,244,246,0.6); }
+
+/* ─── ANIMATION ─── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  header, footer { padding-left: 24px; padding-right: 24px; }
+  .page { padding: 0 24px; }
+  .btn-cta { padding: 16px 32px; width: 100%; text-align: center; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo-text">Academia Pro</a>
+</header>
+
+<!-- MAIN -->
+<div class="page">
+  <section class="hero">
+
+    <p class="video-label">· Vídeo de <strong>20 minutos</strong> ·</p>
+
+    <!-- VIDEO -->
+    <div class="video-wrapper">
+      <!--
+        Reemplaza este bloque con tu iframe real:
+
+        Vimeo:
+        <iframe src="https://player.vimeo.com/video/ID?autoplay=1&title=0&byline=0&portrait=0"
+                allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+        YouTube:
+        <iframe src="https://www.youtube.com/embed/ID?autoplay=1"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      -->
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+        <p>Inserta aquí el iframe de tu vídeo</p>
+      </div>
+    </div>
+
+    <!-- UNDER VIDEO -->
+    <div class="under-video">
+      <h2>
+        Descubre la <strong>única metodología</strong>
+        <span class="normal"> que te permitirá </span>
+        <strong>dominar tu sector</strong>
+        <span class="normal"> y no tener techo en tu </span>
+        <strong>carrera profesional.</strong>
+      </h2>
+
+      <a href="funnel-wizard.html" class="btn-cta">Agendar llamada gratuita</a>
+      <p class="cta-hint">Sin compromiso · Plazas limitadas</p>
+    </div>
+
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-text">Academia Pro</div>
+  <p class="footer-copy">2026 Academia Pro. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="#">Aviso Legal</a>
+    <a href="#">Política de Privacidad</a>
+    <a href="#">Política de Cookies</a>
+  </div>
+</footer>
+
+</body>
+</html>

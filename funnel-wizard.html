@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sesión de consultoría — Academia Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0c0c0e;
+  --bg2:      #111115;
+  --border:   rgba(255,255,255,0.08);
+  --border2:  rgba(255,255,255,0.14);
+  --text:     #f4f4f6;
+  --muted:    rgba(244,244,246,0.45);
+  --muted2:   rgba(244,244,246,0.22);
+  --pill-bg:  rgba(255,255,255,0.05);
+  --pill-sel: rgba(255,255,255,0.10);
+  --pill-brd: rgba(255,255,255,0.10);
+  --pill-sel-brd: rgba(255,255,255,0.35);
+  --font:     'Manrope', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+/* ─── HEADER ─── */
+header {
+  padding: 36px 40px 0;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* ─── PROGRESS BAR ─── */
+.progress-wrap {
+  max-width: 560px;
+  margin: 32px auto 0;
+  padding: 0 40px;
+  width: 100%;
+}
+
+.progress-track {
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--text);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.progress-label {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* ─── MAIN ─── */
+.page {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  flex: 1;
+}
+
+/* ─── STEP WRAPPER ─── */
+.step {
+  display: none;
+  padding: 64px 0 40px;
+  animation: stepIn 0.3s ease both;
+}
+
+.step.active { display: block; }
+
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── INTRO STEP ─── */
+.intro-step {
+  text-align: center;
+  padding: 80px 0 40px;
+}
+
+.intro-step h1 {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.intro-step p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 420px;
+  margin: 0 auto 40px;
+}
+
+/* ─── QUESTION ─── */
+.question-label {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  margin-bottom: 32px;
+}
+
+/* ─── TEXT INPUT ─── */
+.field-wrap {
+  margin-bottom: 32px;
+}
+
+.field-input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.field-input::placeholder { color: var(--muted); }
+.field-input:focus {
+  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.07);
+}
+
+/* phone row */
+.phone-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.phone-row:focus-within {
+  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.07);
+}
+
+.phone-prefix {
+  display: flex;
+  align-items: center;
+  padding: 14px 12px 14px 16px;
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap;
+  border-right: 1px solid rgba(255,255,255,0.09);
+}
+
+.phone-prefix select {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: var(--font);
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+}
+
+.phone-prefix select option { background: #1a1a22; color: var(--text); }
+
+.phone-input {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 14px 16px;
+  font-family: var(--font);
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+}
+
+.phone-input::placeholder { color: var(--muted); }
+
+/* ─── PILL OPTIONS ─── */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.option-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 16px;
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-brd);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  user-select: none;
+}
+
+.option-pill:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--border2);
+}
+
+.option-pill.selected {
+  background: var(--pill-sel);
+  border-color: var(--pill-sel-brd);
+}
+
+.option-letter {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.option-pill.selected .option-letter {
+  background: var(--text);
+  border-color: var(--text);
+  color: #0c0c0e;
+}
+
+.option-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+/* ─── BUTTONS ─── */
+.btn-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--text);
+  color: #0c0c0e;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.btn-next:hover  { opacity: 0.88; transform: translateY(-1px); }
+.btn-next:active { transform: translateY(0); }
+
+.btn-next svg {
+  width: 14px;
+  height: 14px;
+  fill: #0c0c0e;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 20px;
+  background: none;
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-back:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
+
+.btn-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ─── FINAL / THANKS ─── */
+.thanks-step {
+  text-align: center;
+  padding: 80px 0 40px;
+}
+
+.thanks-step h2 {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+
+.thanks-step p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 380px;
+  margin: 0 auto 36px;
+}
+
+.btn-calendar {
+  display: inline-block;
+  padding: 16px 40px;
+  background: var(--text);
+  color: #0c0c0e;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.btn-calendar:hover  { opacity: 0.88; transform: translateY(-1px); }
+.btn-calendar:active { transform: translateY(0); }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 40px;
+  max-width: 960px;
+  margin: 40px auto 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: rgba(244,244,246,0.28);
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(244,244,246,0.22);
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links a {
+  font-size: 12px;
+  color: rgba(244,244,246,0.25);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: rgba(244,244,246,0.6); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  header, footer { padding-left: 24px; padding-right: 24px; }
+  .page, .progress-wrap { padding: 0 24px; }
+  .question-label { font-size: 17px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo-text">Academia Pro</a>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap" id="progress-wrap" style="display:none;">
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+  <div class="progress-label" id="progress-label">1 / 8</div>
+</div>
+
+<!-- STEPS -->
+<div class="page">
+
+  <!-- 0 · INTRO -->
+  <div class="step intro-step active" id="step-0">
+    <h1>Sesión de consultoría gratuita</h1>
+    <p>Vamos a hacerte algunas preguntas para personalizar tu sesión. No te equivoques al escribir tu nombre.</p>
+    <button class="btn-next" onclick="goTo(1)">
+      Comenzar
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+
+  <!-- 1 · NOMBRE -->
+  <div class="step" id="step-1">
+    <div class="question-label">Nombre *</div>
+    <div class="field-wrap">
+      <input class="field-input" id="val-nombre" type="text" placeholder="Escribe aquí tu respuesta..." autocomplete="given-name">
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(0)">Atrás</button>
+      <button class="btn-next" onclick="nextText('val-nombre', 2)">
+        Siguiente
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 2 · EMAIL -->
+  <div class="step" id="step-2">
+    <div class="question-label">Tu mejor correo electrónico *</div>
+    <div class="field-wrap">
+      <input class="field-input" id="val-email" type="email" placeholder="nombre@ejemplo.com" autocomplete="email">
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(1)">Atrás</button>
+      <button class="btn-next" onclick="nextText('val-email', 3)">
+        Siguiente
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 3 · TELÉFONO -->
+  <div class="step" id="step-3">
+    <div class="question-label">Número de teléfono *</div>
+    <div class="field-wrap">
+      <div class="phone-row">
+        <div class="phone-prefix">
+          <select id="val-prefix">
+            <option value="+34">+34</option>
+            <option value="+1">+1</option>
+            <option value="+52">+52</option>
+            <option value="+54">+54</option>
+            <option value="+56">+56</option>
+            <option value="+57">+57</option>
+            <option value="+51">+51</option>
+            <option value="+58">+58</option>
+            <option value="+44">+44</option>
+            <option value="+33">+33</option>
+            <option value="+49">+49</option>
+          </select>
+        </div>
+        <input class="phone-input" id="val-phone" type="tel" placeholder="612 34 56 78" autocomplete="tel">
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(2)">Atrás</button>
+      <button class="btn-next" onclick="nextText('val-phone', 4)">
+        Siguiente
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 4 · EDAD -->
+  <div class="step" id="step-4">
+    <div class="question-label">¿Qué edad tienes? *</div>
+    <div class="options-list" id="opts-4">
+      <div class="option-pill" onclick="selectPill(this, 4, 5)"><div class="option-letter">A</div><div class="option-text">Soy menor de 18 años</div></div>
+      <div class="option-pill" onclick="selectPill(this, 4, 5)"><div class="option-letter">B</div><div class="option-text">Tengo entre 18 y 24 años</div></div>
+      <div class="option-pill" onclick="selectPill(this, 4, 5)"><div class="option-letter">C</div><div class="option-text">Tengo entre 25 y 34 años</div></div>
+      <div class="option-pill" onclick="selectPill(this, 4, 5)"><div class="option-letter">D</div><div class="option-text">Tengo entre 35 y 44 años</div></div>
+      <div class="option-pill" onclick="selectPill(this, 4, 5)"><div class="option-letter">E</div><div class="option-text">Tengo entre 45 y 54 años</div></div>
+      <div class="option-pill" onclick="selectPill(this, 4, 5)"><div class="option-letter">F</div><div class="option-text">Soy mayor de 55 años</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(3)">Atrás</button>
+      <button class="btn-next" onclick="nextPill(4, 5)">
+        Siguiente
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 5 · OCUPACIÓN -->
+  <div class="step" id="step-5">
+    <div class="question-label">¿A qué te dedicas en este momento? *</div>
+    <div class="options-list" id="opts-5">
+      <div class="option-pill" onclick="selectPill(this, 5, 6)"><div class="option-letter">A</div><div class="option-text">Tengo un empleo</div></div>
+      <div class="option-pill" onclick="selectPill(this, 5, 6)"><div class="option-letter">B</div><div class="option-text">Soy estudiante</div></div>
+      <div class="option-pill" onclick="selectPill(this, 5, 6)"><div class="option-letter">C</div><div class="option-text">Estoy estudiando y trabajando</div></div>
+      <div class="option-pill" onclick="selectPill(this, 5, 6)"><div class="option-letter">D</div><div class="option-text">Estoy desempleado</div></div>
+      <div class="option-pill" onclick="selectPill(this, 5, 6)"><div class="option-letter">E</div><div class="option-text">Soy emprendedor</div></div>
+      <div class="option-pill" onclick="selectPill(this, 5, 6)"><div class="option-letter">F</div><div class="option-text">Soy jubilado</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(4)">Atrás</button>
+      <button class="btn-next" onclick="nextPill(5, 6)">
+        Siguiente
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 6 · INGRESOS -->
+  <div class="step" id="step-6">
+    <div class="question-label">¿Qué ingresos mensuales netos estás generando en la actualidad? (en euros o dólares) *</div>
+    <div class="options-list" id="opts-6">
+      <div class="option-pill" onclick="selectPill(this, 6, 7)"><div class="option-letter">A</div><div class="option-text">Menos de 500 al mes</div></div>
+      <div class="option-pill" onclick="selectPill(this, 6, 7)"><div class="option-letter">B</div><div class="option-text">Entre 500 y 900 al mes</div></div>
+      <div class="option-pill" onclick="selectPill(this, 6, 7)"><div class="option-letter">C</div><div class="option-text">Entre 900 y 1600 al mes</div></div>
+      <div class="option-pill" onclick="selectPill(this, 6, 7)"><div class="option-letter">D</div><div class="option-text">Entre 1600 y 2500 al mes</div></div>
+      <div class="option-pill" onclick="selectPill(this, 6, 7)"><div class="option-letter">E</div><div class="option-text">Más de 2500 al mes</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(5)">Atrás</button>
+      <button class="btn-next" onclick="nextPill(6, 7)">
+        Siguiente
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 7 · NIVEL -->
+  <div class="step" id="step-7">
+    <div class="question-label">¿Qué nivel de conocimientos tienes en tu sector? *</div>
+    <div class="options-list" id="opts-7">
+      <div class="option-pill" onclick="selectPill(this, 7, 8)"><div class="option-letter">A</div><div class="option-text">Parto absolutamente de cero.</div></div>
+      <div class="option-pill" onclick="selectPill(this, 7, 8)"><div class="option-letter">B</div><div class="option-text">Nivel básico, con algunas nociones generales.</div></div>
+      <div class="option-pill" onclick="selectPill(this, 7, 8)"><div class="option-letter">C</div><div class="option-text">Nivel intermedio, con base sólida y algo de experiencia.</div></div>
+      <div class="option-pill" onclick="selectPill(this, 7, 8)"><div class="option-letter">D</div><div class="option-text">Nivel avanzado, trabajo en el sector actualmente.</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(6)">Atrás</button>
+      <button class="btn-next" onclick="nextPill(7, 8)">
+        Siguiente
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 8 · OBJETIVO -->
+  <div class="step" id="step-8">
+    <div class="question-label">¿Cuál es tu objetivo más inmediato? *</div>
+    <div class="options-list" id="opts-8">
+      <div class="option-pill" onclick="selectPill(this, 8, 9)"><div class="option-letter">A</div><div class="option-text">Conseguir mi primera certificación oficial.</div></div>
+      <div class="option-pill" onclick="selectPill(this, 8, 9)"><div class="option-letter">B</div><div class="option-text">Obtener mi primer salario en el sector.</div></div>
+      <div class="option-pill" onclick="selectPill(this, 8, 9)"><div class="option-letter">C</div><div class="option-text">Conseguir mi primer empleo.</div></div>
+      <div class="option-pill" onclick="selectPill(this, 8, 9)"><div class="option-letter">D</div><div class="option-text">Obtener una certificación avanzada.</div></div>
+      <div class="option-pill" onclick="selectPill(this, 8, 9)"><div class="option-letter">E</div><div class="option-text">Ya trabajo en el sector y quiero ascender.</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(7)">Atrás</button>
+      <button class="btn-next" onclick="nextPill(8, 9)">
+        Siguiente
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 9 · INVERSIÓN -->
+  <div class="step" id="step-9">
+    <div class="question-label">Si nuestro programa se ajusta a tus objetivos, ¿estarás dispuesto a realizar una inversión seria en ti mismo? *</div>
+    <div class="options-list" id="opts-9">
+      <div class="option-pill" onclick="selectPill(this, 9, 9)"><div class="option-letter">A</div><div class="option-text">Sí, estoy buscando realizar una inversión seria en formación</div></div>
+      <div class="option-pill" onclick="selectPill(this, 9, 9)"><div class="option-letter">B</div><div class="option-text">No, no puedo invertir en mí mismo</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goTo(8)">Atrás</button>
+      <button class="btn-next" onclick="submitForm()">
+        Enviar
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- FINAL -->
+  <div class="step thanks-step" id="step-final">
+    <h2>Todo listo.</h2>
+    <p>Hemos recibido tus respuestas. Elige el horario que mejor te venga para tu sesión gratuita.</p>
+    <a href="funnel-calendar.html" class="btn-calendar">Agendar mi sesión</a>
+  </div>
+
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-text">Academia Pro</div>
+  <p class="footer-copy">2026 Academia Pro. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="#">Aviso Legal</a>
+    <a href="#">Política de Privacidad</a>
+    <a href="#">Política de Cookies</a>
+  </div>
+</footer>
+
+<script>
+  const TOTAL_STEPS = 9; // sin contar intro ni final
+  const answers = {};
+  let currentStep = 0;
+
+  function goTo(n) {
+    document.getElementById('step-' + currentStep).classList.remove('active');
+
+    // mostrar / ocultar progress
+    const pw = document.getElementById('progress-wrap');
+    if (n === 0 || n === 'final') {
+      pw.style.display = 'none';
+    } else {
+      pw.style.display = 'block';
+      const pct = Math.round(((n - 1) / TOTAL_STEPS) * 100);
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-label').textContent = n + ' / ' + TOTAL_STEPS;
+    }
+
+    if (n === 'final') {
+      document.getElementById('step-final').classList.add('active');
+      currentStep = 'final';
+    } else {
+      document.getElementById('step-' + n).classList.add('active');
+      currentStep = n;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextText(fieldId, nextStep) {
+    const val = document.getElementById(fieldId).value.trim();
+    if (!val) {
+      document.getElementById(fieldId).focus();
+      return;
+    }
+    answers[fieldId] = val;
+    goTo(nextStep);
+  }
+
+  function selectPill(el, stepNum, nextStep) {
+    // deselect siblings
+    document.querySelectorAll('#opts-' + stepNum + ' .option-pill').forEach(p => p.classList.remove('selected'));
+    el.classList.add('selected');
+    answers['step-' + stepNum] = el.querySelector('.option-text').textContent;
+
+    // auto-advance after brief delay
+    setTimeout(() => goTo(nextStep), 260);
+  }
+
+  function nextPill(stepNum, nextStep) {
+    const selected = document.querySelector('#opts-' + stepNum + ' .option-pill.selected');
+    if (!selected) return;
+    goTo(nextStep);
+  }
+
+  function submitForm() {
+    const selected = document.querySelector('#opts-9 .option-pill.selected');
+    if (!selected) return;
+
+    // ── Conecta aquí tu webhook / CRM ──
+    // fetch('TU_WEBHOOK_URL', {
+    //   method: 'POST',
+    //   body: JSON.stringify(answers),
+    //   headers: { 'Content-Type': 'application/json' }
+    // });
+
+    goTo('final');
+  }
+
+  // Avanzar con Enter en inputs de texto
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    if (currentStep === 1) nextText('val-nombre', 2);
+    else if (currentStep === 2) nextText('val-email', 3);
+    else if (currentStep === 3) nextText('val-phone', 4);
+  });
+</script>
+
+</body>
+</html>

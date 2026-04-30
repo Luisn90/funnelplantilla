@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenda tu sesión — Academia Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #0c0c0e;
+  --bg2:    #111115;
+  --border: rgba(255,255,255,0.08);
+  --text:   #f4f4f6;
+  --muted:  rgba(244,244,246,0.45);
+  --font:   'Manrope', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+/* ─── HEADER ─── */
+header {
+  padding: 36px 40px 0;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* ─── PAGE ─── */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  flex: 1;
+}
+
+/* ─── HERO TEXT ─── */
+.hero {
+  padding: 56px 0 40px;
+  text-align: center;
+}
+
+.video-label {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+  animation: fadeIn 0.5s ease both;
+}
+
+.hero-title {
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  animation: fadeIn 0.5s ease 0.05s both;
+}
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 480px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease 0.1s both;
+}
+
+/* ─── CALENDAR EMBED AREA ─── */
+.calendar-wrap {
+  margin: 40px 0 0;
+  animation: fadeIn 0.6s ease 0.15s both;
+}
+
+/* El embed se inyecta aquí desde el admin */
+#calendar-embed {
+  width: 100%;
+  min-height: 680px;
+}
+
+/* Placeholder visible solo cuando no hay embed configurado */
+.calendar-placeholder {
+  width: 100%;
+  min-height: 680px;
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px;
+  text-align: center;
+}
+
+.placeholder-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.placeholder-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--muted);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.placeholder-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(244,244,246,0.5);
+}
+
+.placeholder-sub {
+  font-size: 13px;
+  color: rgba(244,244,246,0.28);
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 40px;
+  max-width: 960px;
+  margin: 48px auto 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: rgba(244,244,246,0.28);
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(244,244,246,0.22);
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links a {
+  font-size: 12px;
+  color: rgba(244,244,246,0.25);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: rgba(244,244,246,0.6); }
+
+/* ─── ANIMATION ─── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  header, footer { padding-left: 24px; padding-right: 24px; }
+  .page { padding: 0 24px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo-text">Academia Pro</a>
+</header>
+
+<!-- MAIN -->
+<div class="page">
+  <section class="hero">
+    <p class="video-label">· Último paso ·</p>
+    <h1 class="hero-title">Elige tu horario</h1>
+    <p class="hero-sub">Selecciona el día y la hora que mejor te venga. La sesión es gratuita y dura aproximadamente 30 minutos.</p>
+  </section>
+
+  <div class="calendar-wrap">
+    <div id="calendar-embed">
+      <!--
+        ADMIN: el embed del calendario se inyecta aquí automáticamente.
+        Cuando configures el código en el panel, este placeholder desaparece.
+      -->
+      <div class="calendar-placeholder" id="calendar-placeholder">
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <div class="placeholder-title">Calendario no configurado</div>
+        <div class="placeholder-sub">Pega el código embed de tu calendario desde el panel de administración.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-text">Academia Pro</div>
+  <p class="footer-copy">2026 Academia Pro. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="#">Aviso Legal</a>
+    <a href="#">Política de Privacidad</a>
+    <a href="#">Política de Cookies</a>
+  </div>
+</footer>
+
+<script>
+  // El admin inyecta el embed guardado en localStorage bajo la clave 'calendar_embed'
+  const saved = localStorage.getItem('calendar_embed');
+  if (saved && saved.trim()) {
+    document.getElementById('calendar-embed').innerHTML = saved;
+  }
+</script>
+
+</body>
+</html>
