@@ -68,15 +68,34 @@ footer a:hover { color: var(--muted); }
 </head>
 <body>
 
-<header>
+<nav>
   <div class="nav-inner">
-    <a href="home.html" class="logo">Academia Pro</a>
-    <div class="nav-right">
-      <a href="blog.html">Blog</a>
-      <a href="funnel-landing.html" class="btn-nav">Ver clase gratis</a>
+    <a href="home.html" class="nav-logo">Academia Pro</a>
+    <ul class="nav-links">
+      <li><a href="home.html#formacion">Formación</a></li>
+      <li><a href="home.html#temarios">Temarios</a></li>
+      <li><a href="home.html#profesores">Profesores</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="home.html#dudas" class="btn btn-ghost nav-cta">¿Tienes dudas?</a>
+      <a href="funnel-landing.html" class="btn btn-primary nav-cta">Empezar ahora</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
     </div>
   </div>
-</header>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="home.html#formacion" onclick="toggleMenu()">Formación</a>
+  <a href="home.html#temarios" onclick="toggleMenu()">Temarios</a>
+  <a href="home.html#profesores" onclick="toggleMenu()">Profesores</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="home.html#dudas" onclick="toggleMenu()">¿Tienes dudas?</a>
+  <a href="funnel-landing.html" class="btn btn-primary" style="text-align:center;margin-top:8px;">Empezar ahora</a>
+</div>
+
+
 
 <div class="page">
   <p class="article-tag">Empleabilidad</p>
@@ -171,6 +190,10 @@ footer a:hover { color: var(--muted); }
 <script>
 (function(){var c=localStorage.getItem('cookie_consent');if(!c){setTimeout(function(){document.getElementById('cookie-banner').style.display='block';},800);}})();
 function cookieChoice(t){localStorage.setItem('cookie_consent',t);var b=document.getElementById('cookie-banner');b.style.transition='opacity 0.3s';b.style.opacity='0';setTimeout(function(){b.style.display='none';},300);}
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
 </script>
 </body> en todas las páginas
 ══════════════════════════════════════ -->
