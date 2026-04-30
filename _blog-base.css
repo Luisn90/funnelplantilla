@@ -1,0 +1,10 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0c0c0e; --bg2: #111115; --bg3: #16161b;
+  --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.13);
+  --text: #f4f4f6; --muted: rgba(244,244,246,0.55); --muted2: rgba(244,244,246,0.28);
+  --font: 'Manrope', sans-serif; --max: 1100px; --pad: clamp(24px,5vw,80px);
+}
+body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }

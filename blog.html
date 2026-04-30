@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Academia Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0c0c0e; --bg2: #111115; --bg3: #16161b;
+  --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.13);
+  --text: #f4f4f6; --muted: rgba(244,244,246,0.55); --muted2: rgba(244,244,246,0.28);
+  --font: 'Manrope', sans-serif;
+}
+body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+header {
+  position: sticky; top: 0;
+  background: rgba(12,12,14,0.9); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border); z-index: 50;
+  padding: 0 clamp(24px,5vw,80px);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-size: 20px; font-weight: 800; letter-spacing: -0.04em; color: var(--text); text-decoration: none; }
+.nav-right { display: flex; align-items: center; gap: 24px; }
+.nav-right a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-right a:hover { color: var(--text); }
+.btn-nav { padding: 10px 20px; border-radius: 10px; background: var(--text); color: #0c0c0e; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.page { max-width: 1100px; margin: 0 auto; padding: 64px clamp(24px,5vw,80px) 100px; }
+
+.hero { margin-bottom: 56px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted2); margin-bottom: 14px; }
+h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+.hero-sub { font-size: 16px; color: var(--muted); line-height: 1.65; max-width: 480px; }
+
+/* featured */
+.featured {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; margin-bottom: 48px;
+}
+.featured-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden; text-decoration: none; color: var(--text);
+  display: flex; flex-direction: column; transition: border-color 0.2s;
+}
+.featured-card:hover { border-color: var(--border2); }
+.featured-card.main .thumb { aspect-ratio: 16/9; background: linear-gradient(160deg, #1c1c24 0%, #14141a 100%); }
+.featured-card.side .thumb { aspect-ratio: 16/9; background: linear-gradient(160deg, #1a1a22 0%, #12121a 100%); }
+.card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.card-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted2); }
+.card-title { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; }
+.featured-card.side .card-title { font-size: 15px; }
+.card-excerpt { font-size: 13px; color: var(--muted); line-height: 1.65; flex: 1; }
+.card-meta { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.card-date { font-size: 12px; color: var(--muted2); }
+.card-read { font-size: 12px; color: var(--muted2); }
+
+/* grid */
+.grid-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted2); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+.blog-card {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden; text-decoration: none; color: var(--text);
+  display: flex; flex-direction: column; transition: border-color 0.2s;
+}
+.blog-card:hover { border-color: var(--border2); }
+.blog-thumb { width: 100%; aspect-ratio: 16/9; background: linear-gradient(160deg, #1c1c24 0%, #14141a 100%); }
+.blog-content { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+footer { border-top: 1px solid var(--border); padding: 24px clamp(24px,5vw,80px); max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+footer p, footer a { font-size: 12px; color: var(--muted2); text-decoration: none; }
+footer a:hover { color: var(--muted); }
+.footer-links { display: flex; gap: 20px; }
+
+@media (max-width: 700px) {
+  .featured { grid-template-columns: 1fr; }
+  .nav-right .hide-mobile { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="home.html" class="logo">Academia Pro</a>
+    <div class="nav-right">
+      <a href="home.html" class="hide-mobile">Inicio</a>
+      <a href="home.html#formacion" class="hide-mobile">Formación</a>
+      <a href="funnel-landing.html" class="btn-nav">Ver clase gratis</a>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <div class="hero">
+    <p class="section-label">Blog</p>
+    <h1>Recursos para crecer<br>en tu sector.</h1>
+    <p class="hero-sub">Artículos, guías y reflexiones para ayudarte a avanzar en tu carrera y mantenerte al día.</p>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured">
+    <a href="blog-01.html" class="featured-card main">
+      <div class="thumb"></div>
+      <div class="card-body">
+        <p class="card-tag">Carrera profesional</p>
+        <h2 class="card-title">Cómo pasar de cero a profesional en 12 meses sin experiencia previa</h2>
+        <p class="card-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Descubre el método que miles de profesionales han usado para dar el salto.</p>
+        <div class="card-meta">
+          <span class="card-date">15 de abril, 2026</span>
+          <span class="card-read">· 5 min lectura</span>
+        </div>
+      </div>
+    </a>
+
+    <div style="display:flex;flex-direction:column;gap:24px;">
+      <a href="blog-02.html" class="featured-card side">
+        <div class="thumb"></div>
+        <div class="card-body">
+          <p class="card-tag">Tecnología</p>
+          <h2 class="card-title">Las 5 habilidades tech más demandadas en 2026</h2>
+          <p class="card-excerpt">Consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+          <div class="card-meta">
+            <span class="card-date">8 de abril, 2026</span>
+            <span class="card-read">· 4 min</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="blog-03.html" class="featured-card side">
+        <div class="thumb"></div>
+        <div class="card-body">
+          <p class="card-tag">Empleabilidad</p>
+          <h2 class="card-title">Cómo conseguir tu primer empleo tech sin título universitario</h2>
+          <p class="card-excerpt">Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+          <div class="card-meta">
+            <span class="card-date">1 de abril, 2026</span>
+            <span class="card-read">· 6 min</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ALL ARTICLES -->
+  <p class="grid-label">Todos los artículos</p>
+  <div class="blog-grid">
+
+    <a href="blog-01.html" class="blog-card">
+      <div class="blog-thumb"></div>
+      <div class="blog-content">
+        <p class="card-tag">Carrera profesional</p>
+        <h3 class="card-title" style="font-size:15px;">Cómo pasar de cero a profesional en 12 meses sin experiencia previa</h3>
+        <p class="card-excerpt">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+        <p class="card-date" style="margin-top:8px;">15 de abril, 2026</p>
+      </div>
+    </a>
+
+    <a href="blog-02.html" class="blog-card">
+      <div class="blog-thumb"></div>
+      <div class="blog-content">
+        <p class="card-tag">Tecnología</p>
+        <h3 class="card-title" style="font-size:15px;">Las 5 habilidades tech más demandadas en 2026</h3>
+        <p class="card-excerpt">Consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore.</p>
+        <p class="card-date" style="margin-top:8px;">8 de abril, 2026</p>
+      </div>
+    </a>
+
+    <a href="blog-03.html" class="blog-card">
+      <div class="blog-thumb"></div>
+      <div class="blog-content">
+        <p class="card-tag">Empleabilidad</p>
+        <h3 class="card-title" style="font-size:15px;">Cómo conseguir tu primer empleo tech sin título universitario</h3>
+        <p class="card-excerpt">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</p>
+        <p class="card-date" style="margin-top:8px;">1 de abril, 2026</p>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <p>2026 Academia Pro. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="legal-aviso.html">Aviso Legal</a>
+    <a href="legal-privacidad.html">Privacidad</a>
+    <a href="legal-cookies.html">Cookies</a>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════
+     COOKIE BANNER
+     Incluir justo antes de </body> en todas las páginas
+══════════════════════════════════════ -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;width:calc(100% - 48px);max-width:680px;">
+  <div style="background:#111115;border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:20px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 8px 40px rgba(0,0,0,0.5);">
+    <p style="font-family:'Manrope',sans-serif;font-size:13px;color:rgba(244,244,246,0.6);line-height:1.6;flex:1;min-width:200px;margin:0;">
+      Usamos cookies propias y de terceros para analizar el uso del sitio y mostrarte contenido relevante.
+      <a href="legal-cookies.html" style="color:rgba(244,244,246,0.85);text-decoration:underline;text-underline-offset:3px;">Política de Cookies</a>
+    </p>
+    <div style="display:flex;gap:8px;flex-shrink:0;">
+      <button onclick="cookieChoice('reject')" style="padding:10px 18px;border-radius:8px;background:none;border:1px solid rgba(255,255,255,0.13);font-family:'Manrope',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(244,244,246,0.5);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#f4f4f6';this.style.borderColor='rgba(255,255,255,0.25)'" onmouseout="this.style.color='rgba(244,244,246,0.5)';this.style.borderColor='rgba(255,255,255,0.13)'">Rechazar</button>
+      <button onclick="cookieChoice('accept')" style="padding:10px 18px;border-radius:8px;background:#f4f4f6;border:none;font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0c0c0e;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var consent = localStorage.getItem('cookie_consent');
+  if (!consent) {
+    setTimeout(function() {
+      document.getElementById('cookie-banner').style.display = 'block';
+    }, 800);
+  }
+})();
+
+function cookieChoice(type) {
+  localStorage.setItem('cookie_consent', type);
+  var banner = document.getElementById('cookie-banner');
+  banner.style.opacity = '0';
+  banner.style.transform = 'translateX(-50%) translateY(10px)';
+  banner.style.transition = 'opacity 0.3s, transform 0.3s';
+  setTimeout(function() { banner.style.display = 'none'; }, 300);
+}
+</script>
+
+</body>
+</html>
